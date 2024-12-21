@@ -1,0 +1,105 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #e9ecef;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+footer {
+    text-align: center;
+}
+
+.welcome-message {
+    padding: 5px;
+    background: #f8f9fa; /* Açýk gri arka plan */
+    border: 1px solid #ced4da; /* Gri sýnýr */
+    border-radius: 5px;
+    text-align: center; /* Ýçeriði ortalar */
+}
+
+    .welcome-message h2 {
+        margin: 0;
+        font-weight: bold;
+        color: #007bff; /* Mavi baþlýk rengi */
+        margin-bottom: 10px; /* Baþlýk ile altýndaki metin arasýnda boþluk */
+    }
+
+    .welcome-message p {
+        margin-top: 15px; /* Email ile baþlýk arasýnda boþluk */
+        font-size: 16px; /* Email yazý boyutu */
+        font-weight: bold;
+        color: #495057; /* Koyu gri renk */
+    }
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #343a40; /* Koyu gri baþlýk rengi */
+}
+
+.button-container {
+    text-align: center; /* Butonlarý ortalar */
+    align-self: center;
+    margin: 20px auto;
+    background-color: #e9ecef; /* Gri tonlarda arka plan */
+    border-radius: 16px;
+    width: 30%;
+}
+
+.button-container2 {
+    text-align: center; /* Butonlarý ortalar */
+    align-self: center;
+    margin: 20px auto;
+    border-radius: 16px;
+    width: 30%;
+}
+
+.button-form {
+    display: inline-block; /* Butonlarý yan yana yerleþtir */
+    margin-right: 10px; /* Aralarýna boþluk ekle */
+}
+
+button {
+    padding: 10px 15px;
+    margin: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    background-color: #007bff; /* Mavi buton arka plan */
+    color: white;
+}
+
+    button:hover {
+        background: #0056b3; /* Daha koyu mavi hover rengi */
+    }

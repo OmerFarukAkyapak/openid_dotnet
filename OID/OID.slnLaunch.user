@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "OpenIDServer\\OpenIDServer.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "OpenIDApi\\OpenIDApi.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

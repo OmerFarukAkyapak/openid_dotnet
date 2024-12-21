@@ -1,0 +1,6 @@
+@OpenIDApi_HostAddress = http://localhost:5188
+
+GET {{OpenIDApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

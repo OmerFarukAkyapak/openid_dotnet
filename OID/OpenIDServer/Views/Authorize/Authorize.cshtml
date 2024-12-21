@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Mvc
+
+<h2>Authorize</h2>
+<p><strong>Client ID:</strong> @ViewBag.ClientId</p>
+<p><strong>Redirect URI:</strong> @ViewBag.RedirectUri</p>
+<p><strong>Scope:</strong> @ViewBag.Scope</p>
+<p><strong>State:</strong> @ViewBag.State</p>
+
+<form method="post" action="@ViewBag.RedirectUri">
+    <input type="hidden" name="client_id" value="@ViewBag.ClientId" />
+    <input type="hidden" name="redirect_uri" value="@ViewBag.RedirectUri" />
+    <input type="hidden" name="scope" value="@ViewBag.Scope" />
+    <input type="hidden" name="state" value="@ViewBag.State" />
+
+
+</form>
+
+<form method="post" asp-action="RequestToken" asp-controller="Authorize">
+    <button class="btn btn-dark btn-outline-info" type="submit">Authorize</button>
+</form>
+
+<form method="post" asp-action="Logout" asp-controller="Authorize">
+    <button class="btn btn-dark btn-outline-danger" type="submit">Logout</button>
+</form>

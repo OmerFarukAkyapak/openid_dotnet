@@ -1,0 +1,129 @@
+﻿@using Microsoft.AspNetCore.Authentication
+
+@{
+    var userName = ViewData["UserName"] as string;
+    var userEmail = ViewData["UserEmail"] as string;
+    var clientId = TempData["ClientId"] as string;
+    var responseType = TempData["ResponseType"] as string;
+    var responseType1 = TempData["ResponseType"] as string;
+    var redirectUri = TempData["RedirectUri"] as string;
+    var scope = TempData["Scope"] as string;
+    var state = TempData["State"] as string;
+
+    var authenticationResult = await Context.AuthenticateAsync();
+
+    string issued = null;
+    string expires = null;
+
+    if (authenticationResult?.Properties?.Items != null)
+    {
+        issued = authenticationResult.Properties.Items[".issued"];
+        expires = authenticationResult.Properties.Items[".expires"];
+    }
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+<body>
+
+    <div class="container">
+        <h1>OpenID Demo</h1>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="welcome-message">
+                <h2>Welcome, @userName!</h2>
+                <hr />
+                <dl>
+                    <dt>Email</dt>
+                    <dd>@userEmail</dd>
+                </dl>
+
+                <dl>
+                    <dt>Client ID</dt>
+                    <dd>@clientId</dd>
+                </dl>
+
+                <dl>
+                    <dt>Redirect URI</dt>
+                    <dd>@redirectUri</dd>
+                </dl>
+
+                <dl>
+                    <dt>Scope</dt>
+                    <dd>@scope</dd>
+                </dl>
+
+                <dl>
+                    <dt>State</dt>
+                    <dd>@state</dd>
+                </dl>
+
+                <dl>
+                    <dt>Issued</dt>
+                    <dd>@issued</dd>
+                </dl>
+
+                <dl>
+                    <dt>Expires</dt>
+                    <dd>@expires</dd>
+                </dl>
+
+                <button class="btn btn-dark btn-outline-warning" type="button" onclick="showAuthorizeDialog()">Authorize</button>
+
+                <script>
+                    function showAuthorizeDialog() {
+                        var result = confirm("Do you want to authorize this application?");
+                        if (result) {
+                            document.getElementById('authorizeForm').accept.value = "yes";
+                            document.getElementById('authorizeForm').submit();
+                        } else {
+                            document.getElementById('authorizeForm').accept.value = "no";
+                            document.getElementById('authorizeForm').submit();
+                        }
+                    }
+                </script>
+
+                <form id="authorizeForm" asp-controller="Authorize" asp-action="AuthorizePost" class="button-form" method="post">
+                    <input type="hidden" name="client_id" value="@clientId" />
+                    <input type="hidden" name="redirect_uri" value="@redirectUri" />
+                    <input type="hidden" name="scope" value="@scope" />
+                    <input type="hidden" name="state" value="@state" />
+                    <input type="hidden" name="response_type" value="@responseType" />
+                    <input type="hidden" name="accept" value="yes" />
+                </form>
+
+
+
+                <form asp-controller="Authorize" asp-action="Logout" class="button-form" method="post">
+                    <button class="btn btn-dark btn-outline-danger" type="submit">Logout</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="button-container">
+                <form asp-controller="Auth" asp-action="Register" method="get">
+                    <button class="btn btn-dark btn-outline-primary" type="submit">Register</button>
+                </form>
+
+                <form asp-controller="Auth" asp-action="Login" method="post">
+                    <button class="btn btn-dark btn-outline-primary" type="submit">Login</button>
+                </form>
+
+                @*     <form asp-controller="Auth" asp-action="GoogleLogin" method="post">
+                    <button class="btn btn-dark btn-outline-primary" type="submit">Login with Google</button>
+                </form> *@
+
+            </div>
+        }
+    </div>
+
+</body>
+</html>
